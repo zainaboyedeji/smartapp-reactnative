@@ -1,6 +1,13 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, FlatList,SafeAreaView } from "react-native";
-import { Svg, Circle } from "react-native-svg";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
+import Svg, { Path, Circle } from "react-native-svg";
 import { LinearGradient } from "expo-linear-gradient";
 
 const rooms = [
@@ -23,40 +30,99 @@ const rooms = [
 const Dashboard = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-     <View style={styles.container}>
-      <Text style={styles.greeting}>Hello Alyssa!</Text>
-      <Text style={styles.subtitle}>Welcome back to your smart home</Text>
-      <Text style={styles.sectionTitle}>This month energy consumption</Text>
-      
-      <View style={styles.chartContainer}>
-        <Svg width={200} height={200} viewBox="0 0 100 100">
-          <Circle cx="50" cy="50" r="40" stroke="#EEE" strokeWidth="8" fill="none" />
-          <Circle cx="50" cy="50" r="40" stroke="#555" strokeWidth="8" fill="none" strokeDasharray="100 100" strokeDashoffset="25" />
-        </Svg>
-        <View style={styles.energyText}>
-          <Text>June 2023</Text>
-          <Text style={styles.energyValue}>45kW</Text>
-        </View>
-      </View>
-      
-      <Text style={styles.roomHeader}>Your rooms</Text>
-      <FlatList
-        data={rooms}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <View style={styles.roomCard}>
-            <Image source={item.image} style={styles.roomImage} />
-            <LinearGradient colors={["rgba(0,0,0,0.6)", "transparent"]} style={styles.overlay} />
-            <Text style={styles.roomTitle}>{item.name}</Text>
-            <Text style={styles.roomStatus}>{item.status}</Text>
-            <View style={styles.roomDetails}>
-              <Text style={styles.temp}>{item.temp}</Text>
+      <View style={styles.container}>
+        <Text style={styles.greeting}>Hello Alyssa!</Text>
+        <Text style={styles.subtitle}>Welcome back to your smart home</Text>
+        <Text style={styles.sectionTitle}>This month energy consumption</Text>
+
+        <View style={styles.graphContainer}>
+          <Svg width={200} height={100} viewBox="0 0 200 100">
+            {/* Arc Segments */}
+            <Path
+              d="M20,80 A80,80 0 0,1 80,20"
+              stroke="#0B0D16"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <Path
+              d="M80,20 A80,80 0 0,1 130,30"
+              stroke="#7C7E82"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <Path
+              d="M130,30 A80,80 0 0,1 160,60"
+              stroke="#B1B3B6"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <Path
+              d="M160,60 A80,80 0 0,1 180,80"
+              stroke="#E6E6E6"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+          </Svg>
+          <Text style={styles.date}>June 2023</Text>
+          <Text style={styles.energy}>45kW</Text>
+          <View style={styles.legendContainer}>
+            <View style={styles.legendRow}>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#0E0F14" />
+                </Svg>
+                <Text style={styles.legendText}>Air conditioner</Text>
+              </View>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#6D6E71" />
+                </Svg>
+                <Text style={styles.legendText}>Fridge</Text>
+              </View>
+            </View>
+            <View style={styles.legendRow}>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#B2B2B2" />
+                </Svg>
+                <Text style={styles.legendText}>Lamps</Text>
+              </View>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#EFEFEF" />
+                </Svg>
+                <Text style={styles.legendText}>Others</Text>
+              </View>
             </View>
           </View>
-        )}
-      />
-    </View>
- </SafeAreaView>
+
+        </View>
+
+        <Text style={styles.roomHeader}>Your rooms</Text>
+        <FlatList
+          data={rooms}
+          keyExtractor={(item) => item.name}
+          renderItem={({ item }) => (
+            <View style={styles.roomCard}>
+              <Image source={item.image} style={styles.roomImage} />
+              <LinearGradient
+                colors={["rgba(0,0,0,0.6)", "transparent"]}
+                style={styles.overlay}
+              />
+              <Text style={styles.roomTitle}>{item.name}</Text>
+              <Text style={styles.roomStatus}>{item.status}</Text>
+              <View style={styles.roomDetails}>
+                <Text style={styles.temp}>{item.temp}</Text>
+              </View>
+            </View>
+          )}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -65,28 +131,72 @@ const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
   greeting: { fontSize: 30, fontWeight: "bold" },
   subtitle: { fontSize: 14, marginTop: 10 },
-  sectionTitle: { 
-    fontSize: 18, 
-    fontWeight: "bold", 
-    marginTop: 30, 
-    alignItems: "center", 
-    textAlign: "center" 
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 30,
+    alignItems: "center",
+    textAlign: "center",
   },
-  roomHeader: { 
-    fontSize: 24, 
-    fontWeight: "bold", 
-    marginTop: 30, 
+  roomHeader: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 30,
   },
-    chartContainer: { alignItems: "center", marginVertical: 20 },
+  chartContainer: { alignItems: "center", marginVertical: 20 },
   energyText: { position: "absolute", alignItems: "center" },
   energyValue: { fontSize: 24, fontWeight: "bold" },
   roomCard: { marginVertical: 10, borderRadius: 10, overflow: "hidden" },
   roomImage: { width: "100%", height: 150, borderRadius: 10 },
   overlay: { ...StyleSheet.absoluteFillObject, justifyContent: "center" },
-  roomTitle: { position: "absolute", top: 20, left: 10, color: "#FFF", fontWeight: "bold" },
+  roomTitle: {
+    position: "absolute",
+    top: 20,
+    left: 10,
+    color: "#FFF",
+    fontWeight: "bold",
+  },
   roomStatus: { position: "absolute", top: 40, left: 10, color: "#FFF" },
-  roomDetails: { position: "absolute", bottom: 10, left: 10, flexDirection: "row" },
+  roomDetails: {
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    flexDirection: "row",
+  },
   temp: { color: "#FFF", fontWeight: "bold" },
+  graphContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+  },
+  date: {
+    fontSize: 16,
+    color: "#0E0F14",
+    marginTop: -10,
+  },
+  energy: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#0E0F14",
+  },
+  legendContainer: {
+    marginTop: 10,
+  },
+  legendRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+    marginTop: 5,
+  },
+  legendItem: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  legendText: {
+    marginLeft: 5,
+    fontSize: 12,
+    color: "#0E0F14",
+  },
 });
 
 export default Dashboard;
