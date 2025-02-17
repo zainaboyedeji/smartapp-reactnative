@@ -6,7 +6,6 @@ import {
   StyleSheet,
   FlatList,
   SafeAreaView,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import Svg, { Path, Circle } from "react-native-svg";
@@ -39,7 +38,6 @@ const Dashboard = () => {
   const router = useRouter();
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView>
         <View style={styles.container}>
           <Text style={styles.greeting}>Hello Alyssa!</Text>
           <Text style={styles.subtitle}>Welcome back to your smart home</Text>
@@ -113,7 +111,7 @@ const Dashboard = () => {
           <Text style={styles.roomHeader}>Your rooms</Text>
           <FlatList
             data={rooms}
-            keyExtractor={(item, index) => index.toString()} // Fixed keyExtractor
+            keyExtractor={(item, index) => index.toString()} 
             renderItem={({ item }) => (
               <View style={styles.roomCard}>
                 <Image source={item.image} style={styles.roomImage} />
@@ -152,7 +150,6 @@ const Dashboard = () => {
             )}
           />
         </View>
-      </ScrollView>
     </SafeAreaView>
   );
 };

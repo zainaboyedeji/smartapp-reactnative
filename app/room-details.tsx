@@ -1,52 +1,69 @@
-import React from "react";
-import { View, Text, Image, Switch, StatusBar, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  Switch,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "expo-router";
 import livingroomdetails from "../assets/images/living-room-details.png";
+import light from "../assets/images/light.png";
+import airConditioner from "../assets/images/air-conditioner.png";
+import switchBulb from "../assets/images/switch.png";
+import arrowBack from "../assets/images/arrow-back.png";
 
 const RoomDetails = () => {
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
 
-      {/* Header */}
-      <LinearGradient colors={["#C0C0C0", "#E0E0E0"]} style={styles.header}>
-        <View style={styles.headerContent}>
-          <TouchableOpacity>
-            <Ionicons name="chevron-back" size={24} color="black" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Living room</Text>
-          <View style={{ width: 24 }} />
-        </View>
-        <Text style={styles.subHeader}>1 active device</Text>
-      </LinearGradient>
+      <ImageBackground
+        source={livingroomdetails}
+        style={styles.imageBackground}
+        resizeMode="cover"
+      >
+        <View style={styles.overlay}>
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.backButton}
+            >
+              <Image source={arrowBack} accessibilityLabel="Back Arrow" />
+              </TouchableOpacity>
+            <Text style={styles.headerTitle}>Living room</Text>
+            <Text style={styles.subHeader}>1 active device</Text>
+          </View>
 
-      {/* Room Image */}
-      <View style={styles.imageContainer}>
-        <Image source={livingroomdetails} style={styles.image} />
-        <View style={styles.lampIndicator}>
-          <Text style={styles.lampText}>Main lamp</Text>
-          <Text style={styles.lampSubText}>On • 50W</Text>
+          <View style={styles.controls}>
+            <View style={styles.controlButton}>
+              <Image source={light} accessibilityLabel="Light" />
+              <Text style={styles.controlText}>Main lamp</Text>
+              <Image
+                source={switchBulb}
+                accessibilityLabel="Switch"
+              />
+            </View>
+            <View style={[styles.controlButton, styles.disabledControl]}>
+              <Image source={airConditioner} accessibilityLabel="Air Conditioner" />{" "}
+              <Text style={[styles.controlText, styles.disabledText]}>
+                Air conditioner
+              </Text>
+              <Image source={switchBulb} accessibilityLabel="Switch" />
+            </View>
+          </View>
         </View>
-        {/* Ceiling lamp label repositioned */}
-        <View style={styles.ceilingLampIndicator}>
-          <Text style={styles.lampText}>Ceiling lamp</Text>
-        </View>
-      </View>
-
-      {/* Controls */}
-      <View style={styles.controls}>
-        <View style={styles.controlButton}>
-          <Ionicons name="bulb" size={24} color="black" />
-          <Text style={styles.controlText}>Main lamp</Text>
-          <Switch value={true} />
-        </View>
-        <View style={[styles.controlButton, styles.disabledControl]}>
-          <Ionicons name="snow" size={24} color="white" />
-          <Text style={[styles.controlText, styles.disabledText]}>Air conditioner</Text>
-        </View>
-      </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -54,94 +71,67 @@ const RoomDetails = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
   },
-  header: {
-    padding: 20,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    elevation: 3,
-  },
-  headerContent: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  subHeader: {
-    textAlign: "center",
-    color: "gray",
-    marginTop: 5,
-  },
-  imageContainer: {
+  imageBackground: {
     flex: 1,
     width: "100%",
     height: "100%",
+    justifyContent: "space-between",
   },
-  image: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover",
+  overlay: {
+    flex: 1,
+    justifyContent: "space-between",
+    paddingTop: 60,
   },
-  lampIndicator: {
+  header: {
+    alignItems: "center",
+    paddingHorizontal: 20,
+    backgroundColor: "grey",
+    opacity:0.5,
+  },
+  backButton: {
     position: "absolute",
-    bottom: 20,
-    right: 20,
-    backgroundColor: "rgba(255,255,255,0.8)",
-    padding: 10,
-    borderRadius: 10,
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
+    left: 20,
+    top: 0,
   },
-  ceilingLampIndicator: {
-    position: "absolute",
-    top: 10,
-    left: "50%",
-    transform: [{ translateX: -30 }],
-    backgroundColor: "rgba(255,255,255,0.8)",
-    padding: 8,
-    borderRadius: 8,
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-  },
-  lampText: {
+  headerTitle: {
+    fontSize: 24,
+    color: "white",
     fontWeight: "bold",
+    marginTop: 10,
   },
-  lampSubText: {
-    fontSize: 12,
-    color: "gray",
+  subHeader: {
+    color: "#ddd",
+    fontSize: 16,
+    marginTop: 5,
   },
   controls: {
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 20,
-    backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    elevation: 5,
   },
   controlButton: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "white",
-    padding: 10,
-    borderRadius: 10,
-    width: 160,
+    padding: 15,
+    borderRadius: 15,
+    width: 190,
     justifyContent: "space-between",
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
-  disabledControl: {
-    backgroundColor: "gray",
-    opacity: 0.5,
   },
   controlText: {
+    color:"black",
     marginLeft: 10,
     flex: 1,
     textAlign: "left",
+    fontWeight: "600",
+  },
+  disabledControl: {
+    opacity: 0.5,
+    backgroundColor: "grey",
+
   },
   disabledText: {
     color: "white",
