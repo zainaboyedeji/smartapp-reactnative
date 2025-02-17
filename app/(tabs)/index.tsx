@@ -7,6 +7,7 @@ import {
   FlatList,
   SafeAreaView,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import Svg, { Path, Circle } from "react-native-svg";
 import { LinearGradient } from "expo-linear-gradient";
@@ -14,7 +15,8 @@ import temperature from "../../assets/images/temperature.png";
 import light from "../../assets/images/light.png";
 import airConditioner from "../../assets/images/air-conditioner.png";
 import television from "../../assets/images/television.png";
-import speaker from "../../assets/images/temperature.png";
+import speaker from "../../assets/images/speaker.png"; 
+import { useRouter } from "expo-router";
 
 const rooms = [
   {
@@ -29,11 +31,12 @@ const rooms = [
     status: "3/5 is on",
     temp: "25°",
     image: require("../../assets/images/bedroom.png"),
-    imgs: [airConditioner, television,speaker],
+    imgs: [airConditioner, television, speaker],
   },
 ];
 
 const Dashboard = () => {
+  const router = useRouter();
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
@@ -110,7 +113,7 @@ const Dashboard = () => {
           <Text style={styles.roomHeader}>Your rooms</Text>
           <FlatList
             data={rooms}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item, index) => index.toString()} // Fixed keyExtractor
             renderItem={({ item }) => (
               <View style={styles.roomCard}>
                 <Image source={item.image} style={styles.roomImage} />
@@ -128,7 +131,12 @@ const Dashboard = () => {
                     />
                     <Text style={styles.temp}>{item.temp}</Text>
                   </View>
-                  <View style={styles.iconContainer}>
+
+                  {/* Fixed onPress by using TouchableOpacity */}
+                  <TouchableOpacity
+                    style={styles.iconContainer}
+                    onPress={() => router.push("/room-details")}
+                  >
                     {item.imgs?.map((img, index) => (
                       <View key={index} style={styles.iconWrapper}>
                         <Image
@@ -138,7 +146,7 @@ const Dashboard = () => {
                         />
                       </View>
                     ))}
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -166,42 +174,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 30,
   },
-  chartContainer: { alignItems: "center", marginVertical: 20 },
-  energyText: { position: "absolute", alignItems: "center" },
-  energyValue: { fontSize: 24, fontWeight: "bold" },
   graphContainer: {
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
   },
-  date: {
-    fontSize: 16,
-    color: "#0E0F14",
-    marginTop: -10,
-  },
-  energy: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#0E0F14",
-  },
-  legendContainer: {
-    marginTop: 10,
-  },
+  date: { fontSize: 16, color: "#0E0F14", marginTop: -10 },
+  energy: { fontSize: 24, fontWeight: "bold", color: "#0E0F14" },
+  legendContainer: { marginTop: 10 },
   legendRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "80%",
     marginTop: 5,
   },
-  legendItem: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  legendText: {
-    marginLeft: 5,
-    fontSize: 12,
-    color: "#0E0F14",
-  },
+  legendItem: { flexDirection: "row", alignItems: "center" },
+  legendText: { marginLeft: 5, fontSize: 12, color: "#0E0F14" },
 
   roomCard: {
     borderRadius: 15,
@@ -223,11 +211,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   roomStatus: { position: "absolute", top: 50, left: 15, color: "#FFF" },
-  roomDetails: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-  },
+  roomDetails: { flexDirection: "row", alignItems: "center", padding: 15 },
   tempContainer: { flexDirection: "row", alignItems: "center" },
   temp: { marginLeft: 5, fontWeight: "bold" },
   iconContainer: { flexDirection: "row" },
