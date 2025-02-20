@@ -10,16 +10,17 @@ import {
   Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import livingroomdetails from "../assets/images/living-room-details.png";
 import light from "../assets/images/light.png";
 import airConditioner from "../assets/images/air-conditioner.png";
 import switchBulb from "../assets/images/switch.png";
-import arrowBack from "../assets/images/arrow-back.png";
+import arrowBackWhite from "../assets/images/arrow-back-white.png";
 
 const RoomDetails = () => {
   const navigation = useNavigation();
+  const router = useRouter();
+
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
@@ -39,23 +40,26 @@ const RoomDetails = () => {
               onPress={() => navigation.goBack()}
               style={styles.backButton}
             >
-              <Image source={arrowBack} accessibilityLabel="Back Arrow" />
-              </TouchableOpacity>
+              <Image source={arrowBackWhite} accessibilityLabel="Back Arrow White" />
+            </TouchableOpacity>
             <Text style={styles.headerTitle}>Living room</Text>
             <Text style={styles.subHeader}>1 active device</Text>
           </View>
 
           <View style={styles.controls}>
-            <View style={styles.controlButton}>
-              <Image source={light} accessibilityLabel="Light" />
-              <Text style={styles.controlText}>Main lamp</Text>
-              <Image
-                source={switchBulb}
-                accessibilityLabel="Switch"
-              />
-            </View>
+            <TouchableOpacity onPress={() => router.push("/main-lamp")}>
+              <View style={styles.controlButton}>
+                <Image source={light} accessibilityLabel="Light" />
+                <Text style={styles.controlText}>Main lamp</Text>
+                <Image source={switchBulb} accessibilityLabel="Switch" />
+              </View>
+            </TouchableOpacity>
+
             <View style={[styles.controlButton, styles.disabledControl]}>
-              <Image source={airConditioner} accessibilityLabel="Air Conditioner" />{" "}
+              <Image
+                source={airConditioner}
+                accessibilityLabel="Air Conditioner"
+              />
               <Text style={[styles.controlText, styles.disabledText]}>
                 Air conditioner
               </Text>
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     backgroundColor: "grey",
-    opacity:0.5,
+    opacity: 0.5,
   },
   backButton: {
     position: "absolute",
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   controlText: {
-    color:"black",
+    color: "black",
     marginLeft: 10,
     flex: 1,
     textAlign: "left",
@@ -131,7 +135,6 @@ const styles = StyleSheet.create({
   disabledControl: {
     opacity: 0.5,
     backgroundColor: "grey",
-
   },
   disabledText: {
     color: "white",

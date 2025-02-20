@@ -130,7 +130,6 @@ const Dashboard = () => {
                     <Text style={styles.temp}>{item.temp}</Text>
                   </View>
 
-                  {/* Fixed onPress by using TouchableOpacity */}
                   <TouchableOpacity
                     style={styles.iconContainer}
                     onPress={() => router.push("/room-details")}
