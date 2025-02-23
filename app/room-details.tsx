@@ -40,7 +40,10 @@ const RoomDetails = () => {
               onPress={() => navigation.goBack()}
               style={styles.backButton}
             >
-              <Image source={arrowBackWhite} accessibilityLabel="Back Arrow White" />
+              <Image
+                source={arrowBackWhite}
+                accessibilityLabel="Back Arrow White"
+              />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>Living room</Text>
             <Text style={styles.subHeader}>1 active device</Text>
@@ -85,18 +88,19 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     justifyContent: "space-between",
-    paddingTop: 60,
   },
   header: {
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingVertical: 20,
     backgroundColor: "grey",
-    opacity: 0.5,
+    opacity: 0.8,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   backButton: {
     position: "absolute",
     left: 20,
-    top: 0,
+    top: 40,
   },
   headerTitle: {
     fontSize: 24,
@@ -122,8 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     borderRadius: 15,
-    width: 190,
-    justifyContent: "space-between",
+    width: 178,
   },
   controlText: {
     color: "black",

@@ -46,34 +46,35 @@ const Dashboard = () => {
         <View style={styles.graphContainer}>
           <Svg width={200} height={100} viewBox="0 0 200 100">
             <Path
-              d="M20,80 A80,80 0 0,1 80,20"
+              d="M40,90 A90,90 0 0,1 90,30"
               stroke="#0B0D16"
-              strokeWidth={10}
+              strokeWidth={12}
               fill="none"
               strokeLinecap="round"
             />
             <Path
-              d="M80,20 A80,80 0 0,1 130,30"
+              d="M95,27 A90,90 0 0,1 135,40"
               stroke="#7C7E82"
-              strokeWidth={10}
+              strokeWidth={12}
               fill="none"
               strokeLinecap="round"
             />
             <Path
-              d="M130,30 A80,80 0 0,1 160,60"
+              d="M140,43 A90,90 0 0,1 165,70"
               stroke="#B1B3B6"
-              strokeWidth={10}
+              strokeWidth={12}
               fill="none"
               strokeLinecap="round"
             />
             <Path
-              d="M160,60 A80,80 0 0,1 180,80"
+              d="M170,75 A90,90 0 0,1 190,90"
               stroke="#E6E6E6"
-              strokeWidth={10}
+              strokeWidth={12}
               fill="none"
               strokeLinecap="round"
             />
           </Svg>
+
           <Text style={styles.date}>June 2023</Text>
           <Text style={styles.energy}>45kW</Text>
           <View style={styles.legendContainer}>
