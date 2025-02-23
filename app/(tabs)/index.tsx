@@ -14,7 +14,7 @@ import temperature from "../../assets/images/temperature.png";
 import light from "../../assets/images/light.png";
 import airConditioner from "../../assets/images/air-conditioner.png";
 import television from "../../assets/images/television.png";
-import speaker from "../../assets/images/speaker.png"; 
+import speaker from "../../assets/images/speaker.png";
 import { useRouter } from "expo-router";
 
 const rooms = [
@@ -38,117 +38,113 @@ const Dashboard = () => {
   const router = useRouter();
   return (
     <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
-          <Text style={styles.greeting}>Hello Alyssa!</Text>
-          <Text style={styles.subtitle}>Welcome back to your smart home</Text>
-          <Text style={styles.sectionTitle}>This month energy consumption</Text>
+      <View style={styles.container}>
+        <Text style={styles.greeting}>Hello Alyssa!</Text>
+        <Text style={styles.subtitle}>Welcome back to your smart home</Text>
+        <Text style={styles.sectionTitle}>This month energy consumption</Text>
 
-          <View style={styles.graphContainer}>
-            <Svg width={200} height={100} viewBox="0 0 200 100">
-              <Path
-                d="M20,80 A80,80 0 0,1 80,20"
-                stroke="#0B0D16"
-                strokeWidth={10}
-                fill="none"
-                strokeLinecap="round"
-              />
-              <Path
-                d="M80,20 A80,80 0 0,1 130,30"
-                stroke="#7C7E82"
-                strokeWidth={10}
-                fill="none"
-                strokeLinecap="round"
-              />
-              <Path
-                d="M130,30 A80,80 0 0,1 160,60"
-                stroke="#B1B3B6"
-                strokeWidth={10}
-                fill="none"
-                strokeLinecap="round"
-              />
-              <Path
-                d="M160,60 A80,80 0 0,1 180,80"
-                stroke="#E6E6E6"
-                strokeWidth={10}
-                fill="none"
-                strokeLinecap="round"
-              />
-            </Svg>
-            <Text style={styles.date}>June 2023</Text>
-            <Text style={styles.energy}>45kW</Text>
-            <View style={styles.legendContainer}>
-              <View style={styles.legendRow}>
-                <View style={styles.legendItem}>
-                  <Svg height={10} width={10}>
-                    <Circle cx={5} cy={5} r={5} fill="#0E0F14" />
-                  </Svg>
-                  <Text style={styles.legendText}>Air conditioner</Text>
-                </View>
-                <View style={styles.legendItem}>
-                  <Svg height={10} width={10}>
-                    <Circle cx={5} cy={5} r={5} fill="#6D6E71" />
-                  </Svg>
-                  <Text style={styles.legendText}>Fridge</Text>
-                </View>
+        <View style={styles.graphContainer}>
+          <Svg width={200} height={100} viewBox="0 0 200 100">
+            <Path
+              d="M20,80 A80,80 0 0,1 80,20"
+              stroke="#0B0D16"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <Path
+              d="M80,20 A80,80 0 0,1 130,30"
+              stroke="#7C7E82"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <Path
+              d="M130,30 A80,80 0 0,1 160,60"
+              stroke="#B1B3B6"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <Path
+              d="M160,60 A80,80 0 0,1 180,80"
+              stroke="#E6E6E6"
+              strokeWidth={10}
+              fill="none"
+              strokeLinecap="round"
+            />
+          </Svg>
+          <Text style={styles.date}>June 2023</Text>
+          <Text style={styles.energy}>45kW</Text>
+          <View style={styles.legendContainer}>
+            <View style={styles.legendRow}>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#0E0F14" />
+                </Svg>
+                <Text style={styles.legendText}>Air conditioner</Text>
               </View>
-              <View style={styles.legendRow}>
-                <View style={styles.legendItem}>
-                  <Svg height={10} width={10}>
-                    <Circle cx={5} cy={5} r={5} fill="#B2B2B2" />
-                  </Svg>
-                  <Text style={styles.legendText}>Lamps</Text>
-                </View>
-                <View style={styles.legendItem}>
-                  <Svg height={10} width={10}>
-                    <Circle cx={5} cy={5} r={5} fill="#EFEFEF" />
-                  </Svg>
-                  <Text style={styles.legendText}>Others</Text>
-                </View>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#6D6E71" />
+                </Svg>
+                <Text style={styles.legendText}>Fridge</Text>
+              </View>
+            </View>
+            <View style={styles.legendRow}>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#B2B2B2" />
+                </Svg>
+                <Text style={styles.legendText}>Lamps</Text>
+              </View>
+              <View style={styles.legendItem}>
+                <Svg height={10} width={10}>
+                  <Circle cx={5} cy={5} r={5} fill="#EFEFEF" />
+                </Svg>
+                <Text style={styles.legendText}>Others</Text>
               </View>
             </View>
           </View>
-
-          <Text style={styles.roomHeader}>Your rooms</Text>
-          <FlatList
-            data={rooms}
-            keyExtractor={(item, index) => index.toString()} 
-            renderItem={({ item }) => (
-              <View style={styles.roomCard}>
-                <Image source={item.image} style={styles.roomImage} />
-                <LinearGradient
-                  colors={["rgba(0,0,0,0.6)", "transparent"]}
-                  style={styles.overlay}
-                />
-                <Text style={styles.roomTitle}>{item.name}</Text>
-                <Text style={styles.roomStatus}>{item.status}</Text>
-                <View style={styles.roomDetails}>
-                  <View style={styles.tempContainer}>
-                    <Image
-                      source={temperature}
-                      accessibilityLabel="temperature"
-                    />
-                    <Text style={styles.temp}>{item.temp}</Text>
-                  </View>
-
-                  <TouchableOpacity
-                    style={styles.iconContainer}
-                    onPress={() => router.push("/room-details")}
-                  >
-                    {item.imgs?.map((img, index) => (
-                      <View key={index} style={styles.iconWrapper}>
-                        <Image
-                          source={img}
-                          accessibilityLabel={`Icon ${index}`}
-                          style={{ width: 24, height: 24 }}
-                        />
-                      </View>
-                    ))}
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-          />
         </View>
+
+        <Text style={styles.roomHeader}>Your rooms</Text>
+        <FlatList
+          data={rooms}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.roomCard}>
+              <Image source={item.image} style={styles.roomImage} />
+              <Text style={styles.roomTitle}>{item.name}</Text>
+              <Text style={styles.roomStatus}>{item.status}</Text>
+              <View style={styles.roomDetails}>
+                <View style={styles.tempContainer}>
+                  <Image
+                    source={temperature}
+                    accessibilityLabel="temperature"
+                  />
+                  <Text style={styles.temp}>{item.temp}</Text>
+                </View>
+
+                <TouchableOpacity
+                  style={styles.iconContainer}
+                  onPress={() => router.push("/room-details")}
+                >
+                  {item.imgs?.map((img, index) => (
+                    <View key={index} style={styles.iconWrapper}>
+                      <Image
+                        source={img}
+                        accessibilityLabel={`Icon ${index}`}
+                        style={{ width: 20, height: 20 }}
+                      />
+                    </View>
+                  ))}
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -169,6 +165,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 30,
+    marginBottom: 30,
   },
   graphContainer: {
     alignItems: "center",
@@ -181,11 +178,11 @@ const styles = StyleSheet.create({
   legendRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "80%",
+    width: "100%",
     marginTop: 5,
   },
-  legendItem: { flexDirection: "row", alignItems: "center" },
-  legendText: { marginLeft: 5, fontSize: 12, color: "#0E0F14" },
+  legendItem: { flexDirection: "row", alignItems: "center", marginTop: 10 },
+  legendText: { marginLeft: 5, fontSize: 18, color: "#0E0F14" },
 
   roomCard: {
     borderRadius: 15,
@@ -207,14 +204,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   roomStatus: { position: "absolute", top: 50, left: 15, color: "#FFF" },
-  roomDetails: { flexDirection: "row", alignItems: "center", padding: 15 },
-  tempContainer: { flexDirection: "row", alignItems: "center" },
+  roomDetails: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+    position: "absolute",
+    top: 90,
+  },
+  tempContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 6,
+    borderRadius: 6,
+    marginHorizontal: 5,
+  },
   temp: { marginLeft: 5, fontWeight: "bold" },
   iconContainer: { flexDirection: "row" },
   iconWrapper: {
     backgroundColor: "rgba(255,255,255,0.7)",
-    padding: 10,
-    borderRadius: 10,
+    padding: 6,
+    borderRadius: 6,
     marginHorizontal: 5,
   },
 });
