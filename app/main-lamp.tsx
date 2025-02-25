@@ -13,12 +13,16 @@ import mainLamp from "../assets/images/main-lamp.png";
 import { useNavigation } from "expo-router";
 import arrowBackBlack from "../assets/images/arrow-back-black.png";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CircularBrightnessControl from "@/components/CircularBrightnessControl";
+import { TimePickerDropdown } from "@/components/TimePickerDropdown";
 
 const MainLamp = () => {
   const [isOn, setIsOn] = useState(false);
   const [brightness, setBrightness] = useState(65);
   const [yellowLight, setYellowLight] = useState(60);
   const navigation = useNavigation();
+  const [startTime, setStartTime] = useState("15:00P.M");
+  const [endTime, setEndTime] = useState("22:30P.M");
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -49,30 +53,13 @@ const MainLamp = () => {
 
         <Image source={mainLamp} style={styles.lampImage} />
 
-        <View style={styles.brightnessContainer}>
-          <Svg height="150" width="150" viewBox="0 0 100 100">
-            <Circle
-              cx="50"
-              cy="50"
-              r="40"
-              stroke="#000"
-              strokeWidth="4"
-              fill="none"
-              strokeDasharray="250"
-              strokeDashoffset={(100 - brightness) * 2.5}
-            />
-          </Svg>
-          <Text style={styles.brightnessText}>Brightness</Text>
-          <Text style={styles.brightnessValue}>{brightness}%</Text>
-        </View>
-
-        <View style={styles.scheduleContainer}>
-          <Text style={styles.scheduleText}>Schedule</Text>
-          <Text style={styles.scheduleTime}>
-            From <Text style={styles.boldText}>15:00P.M</Text> to{" "}
-            <Text style={styles.boldText}>22:30P.M</Text>
-          </Text>
-        </View>
+        <CircularBrightnessControl />
+        <TimePickerDropdown
+          startTime={startTime}
+          endTime={endTime}
+          onStartTimeChange={setStartTime}
+          onEndTimeChange={setEndTime}
+        />
 
         <View style={styles.sliderContainer}>
           <Text style={styles.sliderLabel}>Yellow light</Text>
@@ -95,7 +82,7 @@ const MainLamp = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", padding: 20 },
+  container: { flex: 1, backgroundColor: "#fff", padding: 10 },
   backButton: { position: "absolute", top: 20, left: 20, zIndex: 10 },
   backText: { fontSize: 20, color: "#000" },
   title: {
