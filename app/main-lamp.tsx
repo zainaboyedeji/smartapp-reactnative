@@ -15,6 +15,8 @@ import arrowBackBlack from "../assets/images/arrow-back-black.png";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CircularBrightnessControl from "@/components/CircularBrightnessControl";
 import { TimePickerDropdown } from "@/components/TimePickerDropdown";
+import LightSlider from "@/components/LightSlider";
+import YellowLight from "@/components/LightSlider";
 
 const MainLamp = () => {
   const [isOn, setIsOn] = useState(false);
@@ -40,9 +42,7 @@ const MainLamp = () => {
             accessibilityLabel="Back Arrow Black"
           />
         </TouchableOpacity>
-
         <Text style={styles.title}>Main lamp</Text>
-
         <Switch
           trackColor={{ false: "#ccc", true: "#000" }}
           thumbColor={isOn ? "#fff" : "#fff"}
@@ -50,9 +50,7 @@ const MainLamp = () => {
           value={isOn}
           style={styles.switch}
         />
-
         <Image source={mainLamp} style={styles.lampImage} />
-
         <CircularBrightnessControl />
         <TimePickerDropdown
           startTime={startTime}
@@ -60,22 +58,10 @@ const MainLamp = () => {
           onStartTimeChange={setStartTime}
           onEndTimeChange={setEndTime}
         />
-
-        <View style={styles.sliderContainer}>
-          <Text style={styles.sliderLabel}>Yellow light</Text>
-          <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={100}
-            step={1}
-            value={yellowLight}
-            onValueChange={setYellowLight}
-            minimumTrackTintColor="#000"
-            maximumTrackTintColor="#ccc"
-            thumbTintColor="#000"
-          />
-          <Text style={styles.sliderValue}>{yellowLight}%</Text>
-        </View>
+        <LightSlider
+          initialValue={60}
+          onValueChange={(value) => console.log("New value:", value)}
+        />
       </View>
     </SafeAreaView>
   );
