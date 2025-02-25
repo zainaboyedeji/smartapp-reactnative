@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRouter } from "expo-router";
@@ -49,25 +50,42 @@ const RoomDetails = () => {
             <Text style={styles.subHeader}>1 active device</Text>
           </View>
 
-          <View style={styles.controls}>
-            <TouchableOpacity onPress={() => router.push("/main-lamp")}>
-              <View style={styles.controlButton}>
-                <Image source={light} accessibilityLabel="Light" />
-                <Text style={styles.controlText}>Main lamp</Text>
+          <View style={styles.controlsContainer}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.scrollContainer}
+            >
+              <TouchableOpacity onPress={() => router.push("/main-lamp")}>
+                <View style={styles.controlButton}>
+                  <Image source={light} accessibilityLabel="Light" />
+                  <Text style={styles.controlText}>Main lamp</Text>
+                  <Image source={switchBulb} accessibilityLabel="Switch" />
+                </View>
+              </TouchableOpacity>
+
+              <View style={[styles.controlButton, styles.disabledControl]}>
+                <Image
+                  source={airConditioner}
+                  accessibilityLabel="Air Conditioner"
+                />
+                <Text style={[styles.controlText, styles.disabledText]}>
+                  Air conditioner
+                </Text>
                 <Image source={switchBulb} accessibilityLabel="Switch" />
               </View>
-            </TouchableOpacity>
 
-            <View style={[styles.controlButton, styles.disabledControl]}>
-              <Image
-                source={airConditioner}
-                accessibilityLabel="Air Conditioner"
-              />
-              <Text style={[styles.controlText, styles.disabledText]}>
-                Air conditioner
-              </Text>
-              <Image source={switchBulb} accessibilityLabel="Switch" />
-            </View>
+              <View style={[styles.controlButton, styles.disabledControl]}>
+                <Image
+                  source={airConditioner}
+                  accessibilityLabel="Air Conditioner"
+                />
+                <Text style={[styles.controlText, styles.disabledText]}>
+                  Air conditioner
+                </Text>
+                <Image source={switchBulb} accessibilityLabel="Switch" />
+              </View>
+            </ScrollView>
           </View>
         </View>
       </ImageBackground>
@@ -113,12 +131,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 5,
   },
-  controls: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 20,
+  controlsContainer: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    paddingVertical: 20,
+  },
+  scrollContainer: {
+    paddingHorizontal: 20,
   },
   controlButton: {
     flexDirection: "row",
@@ -127,6 +146,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 15,
     width: 178,
+    marginRight: 15,
   },
   controlText: {
     color: "black",
