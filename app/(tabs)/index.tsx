@@ -16,6 +16,7 @@ import airConditioner from "../../assets/images/air-conditioner.png";
 import television from "../../assets/images/television.png";
 import speaker from "../../assets/images/speaker.png";
 import { useRouter } from "expo-router";
+import PowerGauge from "@/components/PowerGauge";
 
 const rooms = [
   {
@@ -39,44 +40,11 @@ const Dashboard = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.greeting}>Hello Alyssa!</Text>
+        <Text style={styles.greeting}>Hello Lola!</Text>
         <Text style={styles.subtitle}>Welcome back to your smart home</Text>
         <Text style={styles.sectionTitle}>This month energy consumption</Text>
-
+        <PowerGauge />
         <View style={styles.graphContainer}>
-          <Svg width={200} height={100} viewBox="0 0 200 100">
-            <Path
-              d="M40,90 A90,90 0 0,1 90,30"
-              stroke="#0B0D16"
-              strokeWidth={12}
-              fill="none"
-              strokeLinecap="round"
-            />
-            <Path
-              d="M95,27 A90,90 0 0,1 135,40"
-              stroke="#7C7E82"
-              strokeWidth={12}
-              fill="none"
-              strokeLinecap="round"
-            />
-            <Path
-              d="M140,43 A90,90 0 0,1 165,70"
-              stroke="#B1B3B6"
-              strokeWidth={12}
-              fill="none"
-              strokeLinecap="round"
-            />
-            <Path
-              d="M170,75 A90,90 0 0,1 190,90"
-              stroke="#E6E6E6"
-              strokeWidth={12}
-              fill="none"
-              strokeLinecap="round"
-            />
-          </Svg>
-
-          <Text style={styles.date}>June 2023</Text>
-          <Text style={styles.energy}>45kW</Text>
           <View style={styles.legendContainer}>
             <View style={styles.legendRow}>
               <View style={styles.legendItem}>
@@ -163,15 +131,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   roomHeader: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 25,
+    marginBottom: 15,
   },
   graphContainer: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
   },
   date: { fontSize: 16, color: "#0E0F14", marginTop: -10 },
   energy: { fontSize: 24, fontWeight: "bold", color: "#0E0F14" },
@@ -223,7 +190,7 @@ const styles = StyleSheet.create({
   temp: { marginLeft: 5, fontWeight: "bold" },
   iconContainer: { flexDirection: "row" },
   iconWrapper: {
-    backgroundColor: "rgba(255,255,255,0.7)",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     padding: 6,
     borderRadius: 6,
     marginHorizontal: 5,

@@ -111,10 +111,11 @@ const styles = StyleSheet.create({
   },
   lampImage: {
     width: "100%",
-    height: "40%",
+    height: "26%",
     position: "absolute",
     top: 0,
     alignSelf: "center",
+    zIndex: 10,
   },
 });
 
