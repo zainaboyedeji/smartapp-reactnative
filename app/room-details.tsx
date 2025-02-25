@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,21 +15,33 @@ import { useNavigation, useRouter } from "expo-router";
 import livingroomdetails from "../assets/images/living-room-details.png";
 import light from "../assets/images/light.png";
 import airConditioner from "../assets/images/air-conditioner.png";
-import switchBulb from "../assets/images/switch.png";
 import arrowBackWhite from "../assets/images/arrow-back-white.png";
+import speaker from "../assets/images/speaker.png";
 
 const RoomDetails = () => {
   const navigation = useNavigation();
   const router = useRouter();
 
+  // Separate states for each switch
+  const [mainLampOn, setMainLampOn] = useState(false);
+  const [airConditionerOn, setAirConditionerOn] = useState(false);
+  const [speakerOn, setSpeakerOn] = useState(false);
+
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
+  // Function to handle switch toggle and navigate
+  const handleToggle = (setState, value, route) => {
+    setState(value);
+    if (value) {
+      router.push(route);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
-
       <ImageBackground
         source={livingroomdetails}
         style={styles.imageBackground}
@@ -56,23 +68,18 @@ const RoomDetails = () => {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.scrollContainer}
             >
-              <TouchableOpacity onPress={() => router.push("/main-lamp")}>
-                <View style={styles.controlButton}>
-                  <Image source={light} accessibilityLabel="Light" />
-                  <Text style={styles.controlText}>Main lamp</Text>
-                  <Image source={switchBulb} accessibilityLabel="Switch" />
-                </View>
-              </TouchableOpacity>
-
-              <View style={[styles.controlButton, styles.disabledControl]}>
-                <Image
-                  source={airConditioner}
-                  accessibilityLabel="Air Conditioner"
+              <View style={styles.controlButton}>
+                <Image source={light} accessibilityLabel="Light" />
+                <Text style={styles.controlText}>Main lamp</Text>
+                <Switch
+                  trackColor={{ false: "#ccc", true: "#000" }}
+                  thumbColor={mainLampOn ? "#fff" : "#fff"}
+                  onValueChange={(value) =>
+                    handleToggle(setMainLampOn, value, "/main-lamp")
+                  }
+                  value={mainLampOn}
+                  style={styles.switch}
                 />
-                <Text style={[styles.controlText, styles.disabledText]}>
-                  Air conditioner
-                </Text>
-                <Image source={switchBulb} accessibilityLabel="Switch" />
               </View>
 
               <View style={[styles.controlButton, styles.disabledControl]}>
@@ -83,7 +90,29 @@ const RoomDetails = () => {
                 <Text style={[styles.controlText, styles.disabledText]}>
                   Air conditioner
                 </Text>
-                <Image source={switchBulb} accessibilityLabel="Switch" />
+                <Switch
+                  trackColor={{ false: "#ccc", true: "#000" }}
+                  thumbColor={airConditionerOn ? "#fff" : "#fff"}
+                  onValueChange={(value) =>
+                    handleToggle(setAirConditionerOn, value, "/air-conditioner")
+                  }
+                  value={airConditionerOn}
+                  style={styles.switch}
+                />
+              </View>
+
+              <View style={styles.controlButton}>
+                <Image source={speaker} accessibilityLabel="Speaker" />
+                <Text style={styles.controlText}>Speaker</Text>
+                <Switch
+                  trackColor={{ false: "#ccc", true: "#000" }}
+                  thumbColor={speakerOn ? "#fff" : "#fff"}
+                  onValueChange={(value) =>
+                    handleToggle(setSpeakerOn, value, "/speaker")
+                  }
+                  value={speakerOn}
+                  style={styles.switch}
+                />
               </View>
             </ScrollView>
           </View>
@@ -145,7 +174,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     borderRadius: 15,
-    width: 178,
+    width: 200,
     marginRight: 15,
   },
   controlText: {
@@ -161,6 +190,9 @@ const styles = StyleSheet.create({
   },
   disabledText: {
     color: "white",
+  },
+  switch: {
+    transform: [{ scale: 0.8 }],
   },
 });
 
