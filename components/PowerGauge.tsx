@@ -18,36 +18,36 @@ const PowerGauge: React.FC<PowerGaugeProps> = ({
       <Svg width={250} height={150} viewBox="0 0 250 150">
         {/* Segment 1 - Very light gray (rightmost) */}
         <Path
-          d="M225,125 A100,100 0 0,0 170,35"
+          d="M225,125 A95,95 0 0,0 175,40" // Slightly reduced arc
           stroke="#f5f5f5"
-          strokeWidth={20}
+          strokeWidth={18} // Slightly reduced width to maintain spacing
           strokeLinecap="round"
           fill="none"
         />
 
         {/* Segment 2 - Light gray */}
         <Path
-          d="M160,30 A100,100 0 0,0 90,25"
+          d="M165,35 A95,95 0 0,0 95,30" // Adjusted to introduce spacing
           stroke="#e0e0e0"
-          strokeWidth={20}
+          strokeWidth={18}
           strokeLinecap="round"
           fill="none"
         />
 
         {/* Segment 3 - Medium gray */}
         <Path
-          d="M80,25 A100,100 0 0,0 30,55"
+          d="M85,30 A95,95 0 0,0 35,60"
           stroke="#b0b0b0"
-          strokeWidth={20}
+          strokeWidth={18}
           strokeLinecap="round"
           fill="none"
         />
 
         {/* Segment 4 - Dark navy (leftmost) */}
         <Path
-          d="M20,65 A100,100 0 0,0 10,125"
+          d="M25,70 A95,95 0 0,0 15,125"
           stroke="#1a1b2f"
-          strokeWidth={20}
+          strokeWidth={18}
           strokeLinecap="round"
           fill="none"
         />

@@ -9,6 +9,8 @@ import {
   ImageBackground,
   Image,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRouter } from "expo-router";
@@ -22,7 +24,6 @@ const RoomDetails = () => {
   const navigation = useNavigation();
   const router = useRouter();
 
-  // Separate states for each switch
   const [mainLampOn, setMainLampOn] = useState(false);
   const [airConditionerOn, setAirConditionerOn] = useState(false);
   const [speakerOn, setSpeakerOn] = useState(false);
@@ -31,7 +32,6 @@ const RoomDetails = () => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
-  // Function to handle switch toggle and navigate
   const handleToggle = (setState, value, route) => {
     setState(value);
     if (value) {
@@ -40,14 +40,19 @@ const RoomDetails = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+    <KeyboardAvoidingView
+      style={styles.keyboardView}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <ImageBackground
         source={livingroomdetails}
         style={styles.imageBackground}
         resizeMode="cover"
       >
-        <View style={styles.overlay}>
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle="light-content" />
+
+          {/* HEADER */}
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
@@ -62,9 +67,10 @@ const RoomDetails = () => {
             <Text style={styles.subHeader}>1 active device</Text>
           </View>
 
+          {/* CONTROL PANEL */}
           <View style={styles.controlsContainer}>
             <ScrollView
-              horizontal={true}
+              horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.scrollContainer}
             >
@@ -116,31 +122,28 @@ const RoomDetails = () => {
               </View>
             </ScrollView>
           </View>
-        </View>
+        </SafeAreaView>
       </ImageBackground>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  keyboardView: {
     flex: 1,
   },
   imageBackground: {
     flex: 1,
     width: "100%",
     height: "100%",
-    justifyContent: "space-between",
   },
-  overlay: {
+  container: {
     flex: 1,
-    justifyContent: "space-between",
   },
   header: {
     alignItems: "center",
     paddingVertical: 20,
-    backgroundColor: "grey",
-    opacity: 0.8,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Slight opacity
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
@@ -161,9 +164,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   controlsContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingVertical: 20,
+    backgroundColor: "transparent", // Ensuring the background is still an image
   },
   scrollContainer: {
     paddingHorizontal: 20,
