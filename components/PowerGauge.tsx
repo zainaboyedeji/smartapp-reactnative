@@ -15,39 +15,39 @@ const PowerGauge: React.FC<PowerGaugeProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <Svg width={350} height={180} viewBox="0 0 350 180">
-        {/* Rightmost very light gray segment */}
+      <Svg width={250} height={150} viewBox="0 0 250 150">
+        {/* Segment 1 - Very light gray (rightmost) */}
         <Path
-          d="M290,135 A120,120 0 0,0 200,35"
-          stroke="#f2f2f2"
-          strokeWidth={22}
+          d="M225,125 A100,100 0 0,0 170,35"
+          stroke="#f5f5f5"
+          strokeWidth={20}
           strokeLinecap="round"
           fill="none"
         />
 
-        {/* Second light gray segment from right */}
+        {/* Segment 2 - Light gray */}
         <Path
-          d="M180,27 A120,120 0 0,0 155,22"
-          stroke="#d0d0d0"
-          strokeWidth={22}
+          d="M160,30 A100,100 0 0,0 90,25"
+          stroke="#e0e0e0"
+          strokeWidth={20}
           strokeLinecap="round"
           fill="none"
         />
 
-        {/* Third medium gray segment from right */}
+        {/* Segment 3 - Medium gray */}
         <Path
-          d="M135,20 A120,120 0 0,0 90,33"
+          d="M80,25 A100,100 0 0,0 30,55"
           stroke="#b0b0b0"
-          strokeWidth={22}
+          strokeWidth={20}
           strokeLinecap="round"
           fill="none"
         />
 
-        {/* Leftmost dark navy segment */}
+        {/* Segment 4 - Dark navy (leftmost) */}
         <Path
-          d="M70,43 A120,120 0 0,0 35,135"
-          stroke="#181828"
-          strokeWidth={22}
+          d="M20,65 A100,100 0 0,0 10,125"
+          stroke="#1a1b2f"
+          strokeWidth={20}
           strokeLinecap="round"
           fill="none"
         />
@@ -65,34 +65,31 @@ const PowerGauge: React.FC<PowerGaugeProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 350,
+    width: 250,
     height: 200,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    paddingBottom: 20,
-    marginTop: 10,
   },
   textContainer: {
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    top: "50%", // Center vertically
-    marginTop: -20, // Offset to position text higher
+    top: "55%", // Adjusted for perfect centering
   },
   dateText: {
     fontSize: 16,
-    color: "#000",
-    marginBottom: 8,
+    color: "#333",
+    marginBottom: 4,
     textAlign: "center",
     fontWeight: "400",
   },
   valueText: {
-    fontSize: 40,
-    fontWeight: "800",
-    color: "#000",
+    fontSize: 48,
+    fontWeight: "700",
+    color: "#1a1b2f",
     textAlign: "center",
-    fontFamily: "System",
+    letterSpacing: -1,
   },
 });
 

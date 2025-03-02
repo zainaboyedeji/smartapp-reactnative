@@ -43,7 +43,9 @@ const Dashboard = () => {
         <Text style={styles.greeting}>Hello Lola!</Text>
         <Text style={styles.subtitle}>Welcome back to your smart home</Text>
         <Text style={styles.sectionTitle}>This month energy consumption</Text>
-        <PowerGauge />
+        <View style={styles.powerGauge}>
+          <PowerGauge />
+        </View>
         <View style={styles.graphContainer}>
           <View style={styles.legendContainer}>
             <View style={styles.legendRow}>
@@ -139,6 +141,12 @@ const styles = StyleSheet.create({
   graphContainer: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  powerGauge: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    marginVertical: 10, // Adjust spacing if needed
   },
   date: { fontSize: 16, color: "#0E0F14", marginTop: -10 },
   energy: { fontSize: 24, fontWeight: "bold", color: "#0E0F14" },
