@@ -6,6 +6,8 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  StatusBar,
+  Platform,
 } from "react-native";
 import { useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,15 +17,18 @@ import LightSlider from "@/components/LightSlider";
 import mainLamp from "../assets/images/main-lamp.png";
 import arrowBackBlack from "../assets/images/arrow-back-black.png";
 
-const MainLamp = () => {
-  const [mainLampOn, setMainLampOn] = useState(false);
-  const [startTime, setStartTime] = useState("15:00 P.M");
-  const [endTime, setEndTime] = useState("22:30 P.M");
+const statusBarHeight =
+  Platform.OS === "android" ? StatusBar.currentHeight || 0 : 44; // Default iOS height
+
+const MainLamp: React.FC = () => {
+  const [mainLampOn, setMainLampOn] = useState<boolean>(false);
+  const [startTime, setStartTime] = useState<string>("15:00 P.M");
+  const [endTime, setEndTime] = useState<string>("22:30 P.M");
   const navigation = useNavigation();
 
   // Function to toggle state properly
-  const handleToggle = (setState) => {
-    setState((prev) => !prev);
+  const handleToggle = () => {
+    setMainLampOn((prev) => !prev);
   };
 
   // Debugging: Check if the switch is responding
@@ -57,13 +62,17 @@ const MainLamp = () => {
         <Switch
           trackColor={{ false: "#ccc", true: "#000" }}
           thumbColor={mainLampOn ? "#fff" : "#fff"}
-          onValueChange={() => handleToggle(setMainLampOn)}
+          onValueChange={handleToggle}
           value={mainLampOn}
           style={styles.switch}
         />
 
         {/* Lamp Image */}
-        <Image source={mainLamp} style={styles.lampImage} />
+        <Image
+          source={mainLamp}
+          style={styles.lampImage}
+          pointerEvents="none" // Ensures it doesn't block touch events
+        />
 
         {/* Circular Brightness Control */}
         <CircularBrightnessControl />
@@ -107,14 +116,16 @@ const styles = StyleSheet.create({
   switch: {
     marginTop: 10,
     alignSelf: "flex-start",
-    zIndex: 10,
+    zIndex: 20, // Ensures it's above lampImage
   },
   lampImage: {
     width: "100%",
-    height: "26%",
+    height: "35%", // Scales properly
     position: "absolute",
-    top: 0,
+    top: -statusBarHeight - 30, // Moves it further up
+    left: 80, // Pushes it to the right
     alignSelf: "center",
+    resizeMode: "contain",
     zIndex: 10,
   },
 });

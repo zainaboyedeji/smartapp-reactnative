@@ -74,9 +74,22 @@ const RoomDetails = () => {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.scrollContainer}
             >
-              <View style={styles.controlButton}>
+              <TouchableOpacity
+                disabled={!mainLampOn}
+                style={[
+                  styles.controlButton,
+                  !mainLampOn && styles.disabledControl,
+                ]}
+              >
                 <Image source={light} accessibilityLabel="Light" />
-                <Text style={styles.controlText}>Main lamp</Text>
+                <Text
+                  style={[
+                    styles.controlText,
+                    !mainLampOn && styles.disabledText,
+                  ]}
+                >
+                  Main lamp
+                </Text>
                 <Switch
                   trackColor={{ false: "#ccc", true: "#000" }}
                   thumbColor={mainLampOn ? "#fff" : "#fff"}
@@ -86,14 +99,25 @@ const RoomDetails = () => {
                   value={mainLampOn}
                   style={styles.switch}
                 />
-              </View>
+              </TouchableOpacity>
 
-              <View style={[styles.controlButton, styles.disabledControl]}>
+              <TouchableOpacity
+                disabled={!airConditionerOn}
+                style={[
+                  styles.controlButton,
+                  !airConditionerOn && styles.disabledControl,
+                ]}
+              >
                 <Image
                   source={airConditioner}
                   accessibilityLabel="Air Conditioner"
                 />
-                <Text style={[styles.controlText, styles.disabledText]}>
+                <Text
+                  style={[
+                    styles.controlText,
+                    !airConditionerOn && styles.disabledText,
+                  ]}
+                >
                   Air conditioner
                 </Text>
                 <Switch
@@ -105,11 +129,24 @@ const RoomDetails = () => {
                   value={airConditionerOn}
                   style={styles.switch}
                 />
-              </View>
+              </TouchableOpacity>
 
-              <View style={styles.controlButton}>
+              <TouchableOpacity
+                disabled={!speakerOn}
+                style={[
+                  styles.controlButton,
+                  !speakerOn && styles.disabledControl,
+                ]}
+              >
                 <Image source={speaker} accessibilityLabel="Speaker" />
-                <Text style={styles.controlText}>Speaker</Text>
+                <Text
+                  style={[
+                    styles.controlText,
+                    !speakerOn && styles.disabledText,
+                  ]}
+                >
+                  Speaker
+                </Text>
                 <Switch
                   trackColor={{ false: "#ccc", true: "#000" }}
                   thumbColor={speakerOn ? "#fff" : "#fff"}
@@ -119,7 +156,7 @@ const RoomDetails = () => {
                   value={speakerOn}
                   style={styles.switch}
                 />
-              </View>
+              </TouchableOpacity>
             </ScrollView>
           </View>
         </SafeAreaView>
@@ -171,7 +208,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingVertical: 20,
-    backgroundColor: "transparent", // Ensuring the background is still an image
+    backgroundColor: "transparent",
   },
   scrollContainer: {
     paddingHorizontal: 20,
@@ -193,8 +230,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   disabledControl: {
-    opacity: 0.5,
-    backgroundColor: "grey",
+    opacity: 0.7,
+    backgroundColor: "#444",
   },
   disabledText: {
     color: "white",
