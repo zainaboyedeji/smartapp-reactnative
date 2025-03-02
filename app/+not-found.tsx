@@ -1,14 +1,12 @@
 import { Link, Stack } from "expo-router";
 import { StyleSheet, ImageBackground, View } from "react-native";
-
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import livingroomdetails from "../assets/images/living-room-details.png";
 
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: "Oops!" }} />
+      <Stack.Screen options={{ title: "Page Not Found" }} />
       <ImageBackground
         source={livingroomdetails}
         style={styles.imageBackground}

@@ -14,11 +14,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRouter } from "expo-router";
-import livingroomdetails from "../assets/images/living-room-details.png";
-import light from "../assets/images/light.png";
-import airConditioner from "../assets/images/air-conditioner.png";
-import arrowBackWhite from "../assets/images/arrow-back-white.png";
-import speaker from "../assets/images/speaker.png";
+import livingroomdetails from "@/assets/images/living-room-details.png";
+import light from "@/assets/images/light.png";
+import airConditioner from "@/assets/images/air-conditioner.png";
+import arrowBackWhite from "@/assets/images/arrow-back-white.png";
+import speaker from "@/assets/images/speaker.png";
 
 const RoomDetails = () => {
   const navigation = useNavigation();
@@ -32,7 +32,7 @@ const RoomDetails = () => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
-  const handleToggle = (setState, value, route) => {
+  const handleToggle = (setState: any, value: any, route: any) => {
     setState(value);
     if (value) {
       router.push(route);
@@ -52,7 +52,6 @@ const RoomDetails = () => {
         <SafeAreaView style={styles.container}>
           <StatusBar barStyle="light-content" />
 
-          {/* HEADER */}
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
@@ -67,7 +66,6 @@ const RoomDetails = () => {
             <Text style={styles.subHeader}>1 active device</Text>
           </View>
 
-          {/* CONTROL PANEL */}
           <View style={styles.controlsContainer}>
             <ScrollView
               horizontal
@@ -180,7 +178,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     paddingVertical: 20,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Slight opacity
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

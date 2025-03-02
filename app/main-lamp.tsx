@@ -26,17 +26,10 @@ const MainLamp: React.FC = () => {
   const [endTime, setEndTime] = useState<string>("22:30 P.M");
   const navigation = useNavigation();
 
-  // Function to toggle state properly
   const handleToggle = () => {
     setMainLampOn((prev) => !prev);
   };
 
-  // Debugging: Check if the switch is responding
-  useEffect(() => {
-    console.log("Switch state updated:", mainLampOn);
-  }, [mainLampOn]);
-
-  // Hide the header when component mounts
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
@@ -44,7 +37,6 @@ const MainLamp: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        {/* Back Button */}
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.backButton}
@@ -55,10 +47,8 @@ const MainLamp: React.FC = () => {
           />
         </TouchableOpacity>
 
-        {/* Title */}
         <Text style={styles.title}>Main Lamp</Text>
 
-        {/* Switch */}
         <Switch
           trackColor={{ false: "#ccc", true: "#000" }}
           thumbColor={mainLampOn ? "#fff" : "#fff"}
@@ -67,17 +57,12 @@ const MainLamp: React.FC = () => {
           style={styles.switch}
         />
 
-        {/* Lamp Image */}
-        <Image
-          source={mainLamp}
-          style={styles.lampImage}
-          pointerEvents="none" // Ensures it doesn't block touch events
-        />
+        <View pointerEvents="none">
+          <Image source={mainLamp} style={styles.lampImage} />
+        </View>
 
-        {/* Circular Brightness Control */}
         <CircularBrightnessControl />
 
-        {/* Time Picker */}
         <TimePickerDropdown
           startTime={startTime}
           endTime={endTime}
@@ -85,7 +70,6 @@ const MainLamp: React.FC = () => {
           onEndTimeChange={setEndTime}
         />
 
-        {/* Light Slider */}
         <LightSlider
           initialValue={60}
           onValueChange={(value) => console.log("New value:", value)}
@@ -116,14 +100,14 @@ const styles = StyleSheet.create({
   switch: {
     marginTop: 10,
     alignSelf: "flex-start",
-    zIndex: 20, // Ensures it's above lampImage
+    zIndex: 20,
   },
   lampImage: {
     width: "100%",
-    height: "35%", // Scales properly
+    height: "35%",
     position: "absolute",
-    top: -statusBarHeight - 30, // Moves it further up
-    left: 80, // Pushes it to the right
+    top: -statusBarHeight - 30,
+    left: 80,
     alignSelf: "center",
     resizeMode: "contain",
     zIndex: 10,

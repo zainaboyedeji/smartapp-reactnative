@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -8,8 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import Svg, { Path, Circle } from "react-native-svg";
-import { LinearGradient } from "expo-linear-gradient";
+import Svg, { Circle } from "react-native-svg";
 import temperature from "../../assets/images/temperature.png";
 import light from "../../assets/images/light.png";
 import airConditioner from "../../assets/images/air-conditioner.png";
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    marginVertical: 10, // Adjust spacing if needed
+    marginVertical: 10,
   },
   date: { fontSize: 16, color: "#0E0F14", marginTop: -10 },
   energy: { fontSize: 24, fontWeight: "bold", color: "#0E0F14" },
