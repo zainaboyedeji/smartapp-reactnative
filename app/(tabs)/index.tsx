@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   temp: { marginLeft: 5, fontWeight: "bold" },
   iconContainer: { flexDirection: "row" },
   iconWrapper: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
     padding: 6,
     borderRadius: 6,
     marginHorizontal: 5,

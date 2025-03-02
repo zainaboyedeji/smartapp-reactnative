@@ -39,6 +39,10 @@ const RoomDetails = () => {
     }
   };
 
+  useEffect(() => {
+    StatusBar.setBackgroundColor("red");
+  }, []);
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboardView}
@@ -59,7 +63,7 @@ const RoomDetails = () => {
           <Text style={styles.labelSubtext}>On • 50W</Text>
         </View>
         <SafeAreaView style={styles.container}>
-          <StatusBar barStyle="light-content" />
+          <StatusBar barStyle="light-content" translucent />
 
           <View style={styles.header}>
             <TouchableOpacity
