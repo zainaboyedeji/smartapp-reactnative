@@ -57,9 +57,11 @@ const MainLamp: React.FC = () => {
           style={styles.switch}
         />
 
-        <View pointerEvents="none">
-          <Image source={mainLamp} style={styles.lampImage} />
-        </View>
+        <Image
+          source={mainLamp}
+          style={styles.lampImage}
+          pointerEvents="none"
+        />
 
         <CircularBrightnessControl />
 
