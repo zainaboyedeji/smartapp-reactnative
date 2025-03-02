@@ -49,6 +49,15 @@ const RoomDetails = () => {
         style={styles.imageBackground}
         resizeMode="cover"
       >
+        <Image
+          source={require("@/assets/images/bent-arrow.png")}
+          style={styles.circle}
+        />
+
+        <View style={styles.labelContainer}>
+          <Text style={styles.labelTitle}>Main lamp</Text>
+          <Text style={styles.labelSubtext}>On • 50W</Text>
+        </View>
         <SafeAreaView style={styles.container}>
           <StatusBar barStyle="light-content" />
 
@@ -174,6 +183,36 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+  circle: {
+    position: "absolute",
+    top: 210, // Adjust for correct placement
+    left: 200, // Adjust for correct placement
+    width: 50, // Size of the indicator image
+    height: 50,
+    resizeMode: "contain",
+  },
+  labelContainer: {
+    position: "absolute",
+    top: 250, // Adjust based on your image
+    left: 230,
+    backgroundColor: "#444", // Less transparent
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 15,
+    backdropFilter: "blur(10px)", // Blur effect (if using react-native-blur)
+  },
+  labelTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+  },
+  labelSubtext: {
+    fontSize: 14,
+    color: "white",
+    marginTop: 4,
   },
   header: {
     alignItems: "center",

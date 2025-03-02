@@ -78,11 +78,9 @@ const Dashboard = () => {
         </View>
 
         <Text style={styles.roomHeader}>Your rooms</Text>
-        <FlatList
-          data={rooms}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.roomCard}>
+        <View>
+          {rooms.map((item, index) => (
+            <View key={index} style={styles.roomCard}>
               <Image source={item.image} style={styles.roomImage} />
               <Text style={styles.roomTitle}>{item.name}</Text>
               <Text style={styles.roomStatus}>{item.status}</Text>
@@ -111,8 +109,8 @@ const Dashboard = () => {
                 </TouchableOpacity>
               </View>
             </View>
-          )}
-        />
+          ))}
+        </View>
       </View>
     </SafeAreaView>
   );
